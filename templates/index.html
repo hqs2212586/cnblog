@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页</title>
+    <!-- 引入 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/static/blog/bootstrap-3.3.7/css/bootstrap.css">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/static/js/jquery-3.3.1.js"></script>
+    <!-- 引入 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/static/blog/bootstrap-3.3.7/js/bootstrap.js"></script> <!--依赖jquery-->
+    <style>
+        #user_icon {
+            font-size: 18px; /*调整大小*/
+            margin-right: 10px; /*调整距离*/
+            vertical-align: -3px; /*调整高度*/
+        }
+        .pub_info {
+            margin-top: 10px;
+
+        }
+        .pub_info .glyphicon-comment {
+            vertical-align: -1px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">博客园</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">园子 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">博问</a></li>
+                <li><a href="#">闪存</a></li>
+                <li><a href="#">小组</a></li>
+                <li><a href="#">收藏</a></li>
+                <li><a href="#">招聘</a></li>
+                <li><a href="#">班级</a></li>
+                <li><a href="#">找找看</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    {# 已经登录 #}
+                    <li><a href="#"><span id="user_icon"
+                                          class="glyphicon glyphicon-user"></span>{{ request.user.username }}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">修改密码</a></li>
+                            <li><a href="#">修改头像</a></li>
+                            <li><a href="/logout/">注销</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    {# 还未登录 #}
+                    <li><a href="/login/">登录</a></li>
+                    <li><a href="/register/">注册</a></li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-warning">
+                <div class="panel-heading">Panel heading without title</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">Panel heading without title</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">Panel heading without title</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+<!--文章列表部分-->
+<div class="col-md-6">
+    <div class="article_list">
+        {% for article in article_list %}
+            <div class="article-item">
+                <h5><a href="">{{ article.title }}</a></h5>
+                <div class="article-desc">
+                    <span class="media-left">
+                        {# 用户头像 #}
+                        <a href=""><img width="56" height="56" src="media/{{ article.user.avatar }}" alt=""></a>
+                    </span>
+                    <span class="media-right">
+                        {# 文章摘要 #}
+                        {{ article.desc }}
+                    </span>
+                </div>
+                <!--文章下方详细信息-->
+                <div class="small pub_info">
+                    {# 作者 #}
+                    <span><a href="">{{ article.user.username }}</a></span> &nbsp;&nbsp;&nbsp;
+                    {# 文章发布时间 #}
+                    <span>发布于&nbsp;&nbsp;{{ article.create_time|date:"Y-m-d H:i" }}</span> &nbsp;&nbsp;
+                    {# 评论数 #}
+                    <span class="glyphicon glyphicon-comment"></span> 评论({{ article.comment_count }})&nbsp;&nbsp;
+                    {# 点赞数 #}
+                    <span class="glyphicon glyphicon-thumbs-up"></span> 点赞({{ article.up_count }})
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+
+    </div>
+</div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Panel heading without title</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Panel heading without title</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Panel heading without title</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
