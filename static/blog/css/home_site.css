@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #369;
+}
+
+.header .title {
+    font-size: 18px; /* 字体大小 */
+    font-weight: 100; /* 字体粗细 */
+    line-height: 60px; /* 行高与页头一致，完成居中 */
+    color: white;
+    margin-left: 15px;
+    margin-top: -10px;
+}
+
+.backend {
+    float: right; /* 浮动到右边 */
+    color: white;
+    text-decoration: none; /* 去除下划线 */
+    font-size: 16px;
+    margin-right: 12px;
+    margin-top: 10px;
+}
+.pub_info {
+    margin-top: 10px;
+    color: darkgray;
+}
+
+.menu {
+    margin-top: 20px;
+}

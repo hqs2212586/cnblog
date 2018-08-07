@@ -28,6 +28,10 @@ urlpatterns = [
     path('get_validCode_img/', views.get_validCode_img),
     path('register/', views.register),
 
+    path('digg/', views.digg),  # 点赞
+    path('comment/', views.comment),  # 评论
+    path("get_comment_tree/", views.get_comment_tree),   # 评论树
+
     # media配置
     # 匹配以media开头的任意路径
     re_path(r"media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
@@ -36,4 +40,10 @@ urlpatterns = [
     # 正则规则：\w：匹配数字、字母、下划线   \W：匹配除数字、字母、下划线以外的任意字符
     # '(?P<name>...)' 分组匹配  {"username": alex}
     re_path('^(?P<username>\w+)$', views.home_site),
+
+    # 有名分组
+    re_path('^(?P<username>\w+)/(?P<condition>tag|category|archive)/(?P<param>.*)/$', views.home_site),
+
+    # 文章详情页
+    re_path('^(?P<username>\w+)/articles/(?P<article_id>\d+)$', views.article_detail),
 ]

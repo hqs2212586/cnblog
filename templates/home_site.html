@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div class="article_list">
+        <div class="article_list">
+            {% for article in article_list %}
+                <div class="article-item clearfix">
+                    <h5><a href="/{{ username }}/articles/{{ article.nid }}">{{ article.title }}</a></h5>
+                    <div class="article-desc">
+                        {# 文章摘要 #}
+                        {{ article.desc }}
+                    </div>
+                    <!--文章下方详细信息-->
+                    <div class="small pub_info pull-right">
+                        {# 文章发布时间 #}
+                        <span>发布于&nbsp;&nbsp;{{ article.create_time|date:"Y-m-d H:i" }}</span> &nbsp;&nbsp;
+                        {# 评论数 #}
+                        <span class="glyphicon glyphicon-comment"></span> 评论({{ article.comment_count }})&nbsp;&nbsp;
+                        {# 点赞数 #}
+                        <span class="glyphicon glyphicon-thumbs-up"></span> 点赞({{ article.up_count }})
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

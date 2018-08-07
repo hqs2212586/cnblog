@@ -127,8 +127,8 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+# USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -146,3 +146,11 @@ AUTH_USER_MODEL = 'blog.UserInfo'
 # 与用户上传相关的配置
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+# 邮箱配置
+EMAIL_HOST = 'smtp.163.com'  # 如果是 qq 改成 smtp.exmail.qq.com
+EMAIL_PORT = 465  # qqs是465
+EMAIL_HOST_USER = 'hqs2212586@163.com'           # 帐号
+EMAIL_HOST_PASSWORD = 'hqs132017'  # 密码（授权码）
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    # 默认使用当前配置的user
+EMAIL_USE_SSL = True  # 是否使用SSL证书, 网易邮箱关闭SSL后SMTP应该为25
